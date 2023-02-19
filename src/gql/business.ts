@@ -1,17 +1,19 @@
 export const typeDefs = /* GraphQL */ `
   # custom resolvers
-  type Query {
-    fuzzyBusinessByName(searchString: String): [Business]
-      @cypher(
-        statement: """
-        CALL db.index.fulltext.queryNodes( 'businessNameIndex', $searchString+'~')
-        YIELD node RETURN node
-        """
-      )
-  }
+  # full text search oldWay
+  # type Query {
+  #   fuzzyBusinessByName(searchString: String): [Business]
+  #     @cypher(
+  #       statement: """
+  #       CALL db.index.fulltext.queryNodes( 'businessNameIndex', $searchString+'~')
+  #       YIELD node RETURN node
+  #       """
+  #     )
+  # }
 
-  type Business {
-    businessId: ID!
+  # require to call it BusinessName, this will be used to compose final query name businessesFulltextBusinessName (businesses + Fulltext + BusinessName)
+  type Business @fulltext(indexes: [{ indexName: "BusinessName", fields: ["name"] }]) {
+    businessId: ID! @id
     waitTime: Int! @computed
     averageStars: Float!
       @auth(rules: [{ isAuthenticated: true }])
@@ -24,7 +26,7 @@ export const typeDefs = /* GraphQL */ `
         RETURN rec ORDER BY score DESC LIMIT $first
         """
       )
-    name: String!
+    name: String! @unique(constraintName: "Business_unique_name")
     city: String!
     state: String!
     address: String!

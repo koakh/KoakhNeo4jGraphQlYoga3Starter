@@ -4,8 +4,8 @@ export const typeDefs = /* GraphQL */ `
   # }
 
   type User {
-    userId: ID!
-    name: String!
+    userId: ID! @id
+    name: String! @unique(constraintName: "User_unique_name")
     reviews: [Review!]! @relationship(type: "WROTE", direction: OUT)
   }
 

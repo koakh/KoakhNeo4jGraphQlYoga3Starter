@@ -55,6 +55,9 @@ export const startServer = async (): Promise<void> => {
         ogm
       }
     });
+    // assert and create the necessary constraints @id, @unique, @fulltext, check with `:schema`
+    await neoSchema.assertIndexesAndConstraints({ options: { create: true } });
+
     const server = createServer(yoga);
     server.listen(HTTP_SERVER_PORT, () => {
       debugger;

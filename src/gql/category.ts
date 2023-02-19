@@ -4,7 +4,8 @@ export const typeDefs = /* GraphQL */ `
   # }
 
   type Category {
-    name: String!
+    categoryId: ID! @id
+    name: String! @unique(constraintName: "Category_unique_name")
     businesses: [Business!]! @relationship(type: "IN_CATEGORY", direction: IN)
   }
 `;

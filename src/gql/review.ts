@@ -4,7 +4,7 @@ export const typeDefs = /* GraphQL */ `
   # }
 
   type Review {
-    reviewId: ID! @id
+    reviewId: ID!
     stars: Float!
     date: Date!
     text: String
