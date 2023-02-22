@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@envelop/core': ^3.0.6
   '@faker-js/faker': ^7.6.0
   '@neo4j/graphql': ^3.16.1
   '@neo4j/graphql-ogm': ^3.16.1
@@ -12,16 +13,18 @@ specifiers:
   eslint: ^8.34.0
   eslint-config-prettier: ^8.6.0
   eslint-plugin-prettier: ^4.2.1
-  graphql: 16.6.0
-  graphql-yoga: 3.6.0
+  graphql: ^16.6.0
+  graphql-yoga: ^3.6.0
   neo4j-driver: ^5.5.0
   prettier: ^2.8.4
   ts-node: 10.9.1
   ts-node-dev: ^2.0.0
+  tsconfig-paths: ^4.1.2
   typescript: 4.9.5
   uuid: ^9.0.0
 
 dependencies:
+  '@envelop/core': 3.0.6
   '@neo4j/graphql': 3.16.1_erivdfewvl27cutxqlixre5ceu
   '@neo4j/graphql-ogm': 3.16.1_erivdfewvl27cutxqlixre5ceu
   '@neo4j/graphql-plugin-auth': 2.1.0
@@ -30,6 +33,7 @@ dependencies:
   graphql: 16.6.0
   graphql-yoga: 3.6.0_d3dx4krdt4fsynqrp5lqxelwe4
   neo4j-driver: 5.5.0
+  uuid: 9.0.0
 
 devDependencies:
   '@faker-js/faker': 7.6.0
@@ -41,8 +45,8 @@ devDependencies:
   prettier: 2.8.4
   ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
   ts-node-dev: 2.0.0_4bewfcp2iebiwuold25d6rgcsy
+  tsconfig-paths: 4.1.2
   typescript: 4.9.5
-  uuid: 9.0.0
 
 packages:
 
@@ -648,26 +652,26 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@envelop/core/3.0.4:
-    resolution: {integrity: sha512-AybIZxQsDlFQTWHy6YtX/MSQPVuw+eOFtTW90JsHn6EbmcQnD6N3edQfSiTGjggPRHLoC0+0cuYXp2Ly2r3vrQ==}
+  /@envelop/core/3.0.6:
+    resolution: {integrity: sha512-06t1xCPXq6QFN7W1JUEf68aCwYN0OUDNAIoJe7bAqhaoa2vn7NCcuX1VHkJ/OWpmElUgCsRO6RiBbIru1in0Ig==}
     dependencies:
-      '@envelop/types': 3.0.1
-      tslib: 2.4.0
+      '@envelop/types': 3.0.2
+      tslib: 2.5.0
     dev: false
 
-  /@envelop/types/3.0.1:
-    resolution: {integrity: sha512-Ok62K1K+rlS+wQw77k8Pis8+1/h7+/9Wk5Fgcc2U6M5haEWsLFAHcHsk8rYlnJdEUl2Y3yJcCSOYbt1dyTaU5w==}
+  /@envelop/types/3.0.2:
+    resolution: {integrity: sha512-pOFea9ha0EkURWxJ/35axoH9fDGP5S2cUu/5Mmo9pb8zUf+TaEot8vB670XXihFEn/92759BMjLJNWBKmNhyng==}
     dependencies:
       tslib: 2.5.0
     dev: false
 
-  /@envelop/validation-cache/5.1.0_a6sekiasy2tqr6d5gj7n2wtjli:
+  /@envelop/validation-cache/5.1.0_adj6itjezth6avcd67ktx7eo6a:
     resolution: {integrity: sha512-X0hr7lcT9Ye4Sm43JPaSawmhFl5Uf67z8OEIyphWY4DUNRlY6VClQZRMGP+8iAo9EFcRspvmszBI8b/65JwHaA==}
     peerDependencies:
       '@envelop/core': ^3.0.4
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      '@envelop/core': 3.0.4
+      '@envelop/core': 3.0.6
       fast-json-stable-stringify: 2.1.0
       graphql: 16.6.0
       js-sha1: 0.6.0
@@ -2267,8 +2271,8 @@ packages:
     peerDependencies:
       graphql: ^15.2.0 || ^16.0.0
     dependencies:
-      '@envelop/core': 3.0.4
-      '@envelop/validation-cache': 5.1.0_a6sekiasy2tqr6d5gj7n2wtjli
+      '@envelop/core': 3.0.6
+      '@envelop/validation-cache': 5.1.0_adj6itjezth6avcd67ktx7eo6a
       '@graphql-tools/executor': 0.0.14_graphql@16.6.0
       '@graphql-tools/schema': 9.0.16_graphql@16.6.0
       '@graphql-tools/utils': 9.2.1_graphql@16.6.0
@@ -2627,7 +2631,6 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
-    dev: false
 
   /jsonwebtoken/9.0.0:
     resolution: {integrity: sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==}
@@ -3400,6 +3403,15 @@ packages:
       yn: 3.1.1
     dev: true
 
+  /tsconfig-paths/4.1.2:
+    resolution: {integrity: sha512-uhxiMgnXQp1IR622dUXI+9Ehnws7i/y6xvpZB9IbUVOPy0muvdvgXeZOn88UcGPiT98Vp3rJPTa8bFoalZ3Qhw==}
+    engines: {node: '>=6'}
+    dependencies:
+      json5: 2.2.3
+      minimist: 1.2.8
+      strip-bom: 3.0.0
+    dev: true
+
   /tsconfig/7.0.0:
     resolution: {integrity: sha512-vZXmzPrL+EmC4T/4rVlT2jNVMWCi/O4DIiSj3UHg1OE5kCKbk4mfrXc6dZksLgRM/TZlKnousKH9bbTazUWRRw==}
     dependencies:
@@ -3482,6 +3494,7 @@ packages:
   /uuid/9.0.0:
     resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
+    dev: false
 
   /v8-compile-cache-lib/3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}

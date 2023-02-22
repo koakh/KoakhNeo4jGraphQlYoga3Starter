@@ -14,14 +14,16 @@
     "docker:run:debug": "docker run -it koakh/koakh-neo4j-graphql-yoga3-starter:latest /bin/sh"
   },
   "dependencies": {
+    "@envelop/core": "^3.0.6",
     "@neo4j/graphql": "^3.16.1",
     "@neo4j/graphql-ogm": "^3.16.1",
     "@neo4j/graphql-plugin-auth": "^2.1.0",
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
-    "graphql": "16.6.0",
-    "graphql-yoga": "3.6.0",
-    "neo4j-driver": "^5.5.0"
+    "graphql": "^16.6.0",
+    "graphql-yoga": "^3.6.0",
+    "neo4j-driver": "^5.5.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
@@ -33,7 +35,7 @@
     "prettier": "^2.8.4",
     "ts-node": "10.9.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "4.9.5",
-    "uuid": "^9.0.0"
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "4.9.5"
   }
 }
