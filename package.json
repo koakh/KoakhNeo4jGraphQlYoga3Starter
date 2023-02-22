@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "scripts": {
     "start": "ts-node src/main.ts",
-    "debug": "NODE_ENV=development DEBUG='@neo4j/graphql:execute,Server:*,Neo4j:*' ts-node-dev --exit-child --files --transpile-only --respawn --inspect=4321 --project tsconfig.json src/main.ts",
+    "debug": "ts-node-dev --exit-child --files --transpile-only --respawn --inspect=4321 --project tsconfig.json -- src/main.ts",
     "build": "node ./build.js",
     "check": "tsc --pretty --noEmit",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "seed": "ts-node -r tsconfig-paths/register --project ./src/tsconfig.json ./src/seeder.ts",
+    "seed": "ts-node --project ./tsconfig.json ./seeder.ts",
     "docker:build": "docker build . -t koakh/koakh-neo4j-graphql-yoga3-starter:latest --network host",
     "docker:run": "docker run -p 5000:5000 -d koakh/koakh-neo4j-graphql-yoga3-starter:latest",
     "docker:run:debug": "docker run -it koakh/koakh-neo4j-graphql-yoga3-starter:latest /bin/sh"
@@ -24,6 +24,7 @@
     "neo4j-driver": "^5.5.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/node": "^18.13.0",
     "esbuild": "^0.17.8",
     "eslint": "^8.34.0",
@@ -32,6 +33,7 @@
     "prettier": "^2.8.4",
     "ts-node": "10.9.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "uuid": "^9.0.0"
   }
 }

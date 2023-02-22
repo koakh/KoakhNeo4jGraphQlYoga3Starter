@@ -1,18 +1,11 @@
 {
   "cSpell.words": [
+    "esbuild",
     "gqllib",
     "JWKS",
     "koakh",
-    "outfile"
+    "outfile",
+    "uuidv"
   ],
-  "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#1ed1be",
-    "activityBar.background": "#1ed1be",
-    "activityBar.foreground": "#15202b",
-    "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#cb20df",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "sash.hoverBorder": "#1ed1be"
-  },
   "peacock.color": "#18a596"
 }

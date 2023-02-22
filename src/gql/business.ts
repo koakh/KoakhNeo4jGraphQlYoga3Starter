@@ -26,11 +26,11 @@ export const typeDefs = /* GraphQL */ `
         RETURN rec ORDER BY score DESC LIMIT $first
         """
       )
-    name: String! @unique(constraintName: "Business_unique_name")
+    name: String! @unique(constraintName: "BusinessUniqueName")
     city: String!
     state: String!
     address: String!
-    location: Point!
+    location: Point
     reviews: [Review!]! @relationship(type: "REVIEWS", direction: IN)
     categories: [Category!]! @relationship(type: "IN_CATEGORY", direction: OUT)
   }

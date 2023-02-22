@@ -1,82 +1,128 @@
-// import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
+import { v4 as uuidv4 } from 'uuid';
+import createDebugger from './src/app/debugger';
+import * as neo4j from './src/app/neo4j-driver';
+import { ogm } from './src/app/server';
 // import { appConstants as c } from './app/constants';
-// import createDebugger from './app/debugger';
-// import * as neo4j from './app/neo4j';
-// import { ogm } from './gql';
 // import { hashPassword } from './utils';
 
-// const debug = createDebugger('Seeder');
-// const User = ogm.model('User');
-// const Blog = ogm.model('Blog');
-// const Post = ogm.model('Post');
+const debug = createDebugger('Seeder');
+const Business = ogm.model('Business');
+const Category = ogm.model('Category');
+const User = ogm.model('User');
 // const Comment = ogm.model('Comment');
 
 // const defaultEmail = 'admin@admin.com';
 // const defaultPassword = 'password';
 
-// async function main() {
-//   debug('Seeding Started');
+async function main() {
+  debug('Seeding Started');
 
-//   await neo4j.connect();
+  await neo4j.neo4jConnect();
 
-//   await ogm.init();
+  await ogm.init();
 
-//   await Promise.all([User, Blog, Post, Comment].map((m) => m.delete({})));
+  await Promise.all([
+    Business,
+    Category,
+    User,
+    // Comment
+  ].map((m) => m.delete({})));
 
-//   const { users } = await User.create({
-//     input: await Promise.all(
-//       [
-//         [defaultEmail, defaultPassword, c.authentication.defaultAdminRole],
-//         [faker.internet.email(), faker.internet.password(), c.authentication.defaultUserRole],
-//         [faker.internet.email(), faker.internet.password(), c.authentication.defaultUserRole],
-//       ].map(async ([email, password, roles]) => {
-//         return {
-//           email,
-//           password: await hashPassword(password as string),
-//           roles,
-//         };
-//       })
-//     ),
-//   });
+  const categoryArray = Array();
+  for (let i = 0; i < 5; i++) {
+    categoryArray.push([
+      // uuidv4(),
+      faker.lorem.word()
+    ]);
+  }
 
-//   await Blog.create({
-//     input: users.map((user) => {
-//       return {
-//         name: faker.lorem.word(),
-//         creator: {
-//           connect: { where: { node: { id: user.id } } },
-//         },
-//         posts: {
-//           create: new Array(3).fill(null).map(() => ({
-//             node: {
-//               title: faker.lorem.word(),
-//               content: faker.lorem.paragraphs(4),
-//               author: {
-//                 connect: { where: { node: { id: user.id } } },
-//               },
-//               comments: {
-//                 create: new Array(3).fill(null).map(() => {
-//                   const u = users[Math.floor(Math.random() * users.length)];
-//                   return {
-//                     node: {
-//                       content: faker.lorem.paragraph(),
-//                       author: {
-//                         connect: { where: { node: { id: u.id } } },
-//                       },
-//                     },
-//                   };
-//                 }),
-//               },
-//             },
-//           })),
-//         },
-//       };
-//     }),
-//   });
+  const usersArray = Array();
+  for (let i = 0; i < 5; i++) {
+    usersArray.push([faker.internet.userName()]);
+  }
 
-//   await neo4j.disconnect();
+  const { categories } = await Category.create({
+    input: await Promise.all(
+      [...categoryArray].map(async ([name]) => {
+        return { name, };
+      })
+    ),
+  });
 
-//   debug('Seeding Finished');
-// }
+  const { users } = await User.create({
+    input: await Promise.all(
+      [...usersArray].map(async ([name]) => {
+        return { name, };
+      })
+    ),
+  });
 
-// main();
+  await Business.create({
+    input: categories.map((category) => {
+      return {
+        name: faker.lorem.word(),
+        address: faker.address.streetAddress(),
+        city: faker.address.cityName(),
+        state: faker.address.state(),
+        categories: {
+          connect: { where: { node: { categoryId: category.categoryId } } },
+        },
+        // posts: {
+        //   create: new Array(3).fill(null).map(() => ({
+        //     node: {
+        //       title: faker.lorem.word(),
+        //       content: faker.lorem.paragraphs(4),
+        //       author: {
+        //         connect: { where: { node: { id: category.id } } },
+        //       },
+        //     },
+        //   })),
+        // },
+      };
+    }),
+  });
+
+
+
+  // await Blog.create({
+  //   input: users.map((user) => {
+  //     return {
+  //       name: faker.lorem.word(),
+  //       creator: {
+  //         connect: { where: { node: { id: user.id } } },
+  //       },
+  //       posts: {
+  //         create: new Array(3).fill(null).map(() => ({
+  //           node: {
+  //             title: faker.lorem.word(),
+  //             content: faker.lorem.paragraphs(4),
+  //             author: {
+  //               connect: { where: { node: { id: user.id } } },
+  //             },
+  //             comments: {
+  //               create: new Array(3).fill(null).map(() => {
+  //                 const u = users[Math.floor(Math.random() * users.length)];
+  //                 return {
+  //                   node: {
+  //                     content: faker.lorem.paragraph(),
+  //                     author: {
+  //                       connect: { where: { node: { id: u.id } } },
+  //                     },
+  //                   },
+  //                 };
+  //               }),
+  //             },
+  //           },
+  //         })),
+  //       },
+  //     };
+  //   }),
+  // });
+
+  await neo4j.neo4jConnect();
+
+  debug('Seeding Finished');
+}
+
+main();
